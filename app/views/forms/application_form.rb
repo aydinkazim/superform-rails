@@ -3,7 +3,7 @@ class ApplicationForm < Superform::Rails::Form
 
   def row(component)
     div do
-      render component.field.label(style: "display: block;")
+      render component.field.label(style: 'display: block; color: deeppink')
       render component
     end
   end
@@ -17,13 +17,13 @@ class ApplicationForm < Superform::Rails::Form
   end
 
   def error_messages
-    if model.errors.any?
-      div(style: "color: red;") do
-        h2 { "#{pluralize model.errors.count, "error"} prohibited this post from being saved:" }
-        ul do
-          model.errors.each do |error|
-            li { error.full_message }
-          end
+    return unless model.errors.any?
+
+    div(style: 'color: red;') do
+      h2 { "#{pluralize model.errors.count, 'error'} prohibited this post from being saved:" }
+      ul do
+        model.errors.each do |error|
+          li { error.full_message }
         end
       end
     end
